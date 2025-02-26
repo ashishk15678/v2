@@ -12,8 +12,8 @@ export async function POST(req: any) {
         const sub = await prisma.sub.create({
             data: {
                 email,
-                useragent: headers().get("user-agent"),
-                ip: headers().get("x-forwarded-for")
+                useragent: headers().get("user-agent") || "useragent",
+                ip: headers().get("x-forwarded-for") || "ip"
             }
         })
 
