@@ -1,8 +1,16 @@
 "use client"
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useState } from 'react';
 import { Clock, Send, CheckCircle, ArrowRight, Calendar, Hourglass } from 'lucide-react';
 
 function App() {
+
+
+  const router = useSearchParams()
+  const ref = router.get("ref")
+  // console.log({ ref })
+
+
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
@@ -21,12 +29,14 @@ function App() {
     }
 
     // In a real app, you would send this to your backend
-    const sub = await fetch("/api/sub", { method: "POST", body: JSON.stringify({ email }) })
-    console.log(sub.status, await sub.json())
-    console.log('Email submitted:', email);
+    const sub = await fetch("/api/sub", { method: "POST", body: JSON.stringify({ email, ref }) })
+    // console.log(sub.status, await sub.json())
+    // console.log('Email submitted:', email);
     setSubmitted(true);
     setError('');
   };
+
+
 
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">

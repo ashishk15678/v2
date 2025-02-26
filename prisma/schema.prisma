@@ -20,6 +20,7 @@ model sub {
   updatedAt     DateTime @updatedAt
   useragent     String
   ip            String
+  ref           String?
 }
 
 model User {
